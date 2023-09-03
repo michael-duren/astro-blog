@@ -1,5 +1,31 @@
 ---
+const pageTitle = 'About Me';
 
+const identity = {
+  firstName: 'Michael',
+  lastName: 'Duren',
+  occupation: 'Software Engineer and Developer',
+  hobbies: ['Making Music', 'Playing with my cat', 'Running'],
+};
+
+const skills = [
+  'HTML',
+  'CSS',
+  'Javascript',
+  'Typescript',
+  'React',
+  'Astro',
+  'C#',
+  '.NET',
+  'SQL',
+];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+import Footer from '../components/Footer.astro';
+import Navigation from '../components/Navigation.astro';
 ---
 
 <html lang="en">
@@ -8,26 +34,51 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Michael Duren</title>
+    <title>{pageTitle}</title>
   </head>
   <body>
-    <header
-      class="py-2 px-4 min-h-[10vh] border-2 flex items-center justify-between"
-    >
-      <h1 class="text-lg">Michael Duren</h1>
-      <ul class="flex gap-2">
-        <li>
-          <a href="/"> Home</a>
-        </li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/work">Work</a></li>
-      </ul>
-    </header>
-    <h2>About Me</h2>
+    <Navigation />
+    <main class="px-4 py-2 flex flex-col">
+      <h2 class="text-2xl">{pageTitle}</h2>
 
-    <h2>... and my new Astro Site</h2>
+      <div class="flex flex-col gap-4">
+        {happy && <p>I am happy to be learning Astro!</p>}
 
-    <p>I am working through a tutorial</p>
-    <p>It's going well dood</p>
+        {finished && <p>I finished this tutorial!</p>}
+
+        {
+          goal === 3 ? (
+            <p>My goal is to finish in 3 days.</p>
+          ) : (
+            <p>My goal is not 3 days.</p>
+          )
+        }
+        <h2 class="text-xl">... and my new Astro Site</h2>
+
+        <p>Few Facts about me:</p>
+        <ul class="flex flex-wrap gap-2">
+          <li>
+            My name is {identity.firstName}
+          </li>
+          <li>
+            I am a {identity.occupation}
+          </li>
+          {
+            identity.hobbies.length >= 2 && (
+              <li>
+                Two of my hobbies are: {identity.hobbies[0]} and{' '}
+                {identity.hobbies[1]}
+              </li>
+            )
+          }
+        </ul>
+        <p>My skills are:</p>
+        <ul class="flex flex-wrap gap-2">
+          {skills.map((skill) => <li>{skill}</li>)}
+        </ul>
+        <p>It's going well dood</p>
+      </div>
+    </main>
+    <Footer />
   </body>
 </html>

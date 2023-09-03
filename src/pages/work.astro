@@ -1,5 +1,7 @@
 ---
-
+import Footer from '../components/Footer.astro';
+import Navigation from '../components/Navigation.astro';
+const allPosts = await Astro.glob('../pages/posts/*.md');
 ---
 
 <html lang="en">
@@ -11,23 +13,20 @@
     <title>Michael Duren</title>
   </head>
   <body>
-    <header
-      class="py-2 px-4 min-h-[10vh] border-2 flex items-center justify-between"
-    >
-      <h1 class="text-lg">Michael Duren</h1>
-      <ul class="flex gap-2">
-        <li>
-          <a href="/"> Home</a>
-        </li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/work">Work</a></li>
-      </ul>
-    </header>
+    <Navigation />
     <h2>My Work</h2>
 
     <h2>My work will go here</h2>
 
     <p>I am working through a tutorial</p>
     <p>It's going well dood</p>
+    {
+      allPosts.map((post) => (
+        <li>
+          <a href={post.url}>{post.frontmatter.title}</a>
+        </li>
+      ))
+    }
+    <Footer />
   </body>
 </html>
